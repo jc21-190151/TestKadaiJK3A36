@@ -8,10 +8,11 @@ namespace WindowsFormsApp1
 {
      public class kuriage
     {
-        public static int kurigae10(int j)
+        public static int kuriage10(int j)
         {
             if (j==0)
             {
+
                 return j;
             }
             else if (j % 10 > 0)
