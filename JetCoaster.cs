@@ -10,35 +10,36 @@ namespace WindowsFormsApp1
     {
         public static int ride(int k,int[] g,int r)
         {
-            int x = 0;
-            int n = 0;
             int num = 0;
-            int s = 0;
-            
+            int tmq = 0;
+            int tmp = 0;
+
+            Queue<int> qu = new Queue<int>();
+            for (int i = 0; i < g.Length; i++)
+            {  //キューにグループごとの人数を追加
+                qu.Enqueue(g[i]);
+            }
             while (r > 0)
             {
-                for (int h = 0; h < g.Length; h++)
+                for (int n = 0; n < g.Length; n++)
                 {
-                    s += g[h];
+                    tmq += qu.Peek();  //行列の先頭を取得(取出さない)
+                    if (tmq <= k)  //取出したグループの人数が定員以下の時
+                    { 
+                        tmp = qu.Dequeue(); //値を取得(削除する)
+                        num += tmp;
+                        qu.Enqueue(tmp);  //値を代入
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
-                if (k > s)
-                {
-                    k = s;
-                }
-                else
-                {
-                    s = 0;
-                }
-                for (int i = n; k >= x + g[i % g.Length]; i++)
-                {
-                    x += g[i % g.Length];
-                    n = i%g.Length+1;
-                }
-                num += x;
-                x = 0;
+                tmq = 0;
                 r--;
             }
-                return num;
+            return num;
         }
+            
     }
 }
